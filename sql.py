@@ -1,7 +1,7 @@
 import json
 import mysql.connector
 
-location='C:/Users/user/OneDrive/桌面/stage2/taipei-day-trip/data/taipei-attractions.json'
+location='data/taipei-attractions.json'
 
 with open(location,'r', encoding='utf-8') as f:
     data= json.load(f)
