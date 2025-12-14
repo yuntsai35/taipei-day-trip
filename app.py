@@ -73,6 +73,9 @@ async def attraction(request: Request,page:int=0,category:str|None=None, keyword
         result = cursor.fetchall()
         cursor.close()
         
+        page_size = 8
+        limit_count = page_size + 1
+
         if len(result) == limit_count:
             next_page = page + 1
             data_to_return = result[:page_size] # 只回傳前 8 筆
@@ -82,7 +85,7 @@ async def attraction(request: Request,page:int=0,category:str|None=None, keyword
 
         all_result=[]
         if data_to_return:
-            for data in result:
+            for data in data_to_return:
                 images_list=[]
                 if data.get('images'): 
                     for img in data['images'].split('||'):
