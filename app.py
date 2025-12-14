@@ -77,10 +77,10 @@ async def attraction(request: Request,page:int=0,category:str|None=None, keyword
         limit_count = page_size + 1
 
         if len(result) == limit_count:
-            next_page = page + 1
+            nextPage = page + 1
             data_to_return = result[:page_size] # 只回傳前 8 筆
         else:
-            next_page = None
+            nextPage = None
             data_to_return = result
 
         all_result=[]
@@ -104,7 +104,7 @@ async def attraction(request: Request,page:int=0,category:str|None=None, keyword
 					"images": images_list,
 				}
                 all_result.append(member_data)
-            return {"next page":next_page,"data": all_result}
+            return {"nextPage":nextPage,"data": all_result}
         else:
             return {"nextPage": None,"data": []}
     except HTTPException:
