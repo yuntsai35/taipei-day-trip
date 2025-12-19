@@ -13,7 +13,10 @@ print("database ready")
 
 from fastapi import *
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 app=FastAPI()
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # Static Pages (Never Modify Code in this Block)
 @app.get("/", include_in_schema=False)
@@ -32,7 +35,6 @@ async def thankyou(request: Request):
 @app.get("/api/attractions")
 async def attraction(request: Request,page:int=0,category:str|None=None, keyword:str|None=None):
     
-
     sql_base="SELECT attraction.attraction_id,attraction.name,attraction.category_id, categories.category, attraction.description,attraction.address,attraction.transport,attraction.mrt_id,mrt.mrt_name,attraction.latitude,attraction.longitude,attraction.images FROM attraction inner join mrt on mrt.id = attraction.mrt_id inner join categories on categories.id = attraction.category_id "
     
     sql_order = " ORDER BY attraction.attraction_id ASC"
