@@ -1,0 +1,292 @@
+body {
+    margin: 0;       
+    padding: 0;
+}
+.navbar{
+    display:flex;
+    height:54px;
+    align-items: center;
+    justify-content: center;
+    top:0;
+    left:0;
+    position: fixed;
+    width:100%;
+    z-index: 2000;
+    background-color: white;
+}
+.navbar-container{
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+.left{
+    flex:none;
+    width:200px;
+    font-weight: bold;
+    color:#448899;
+    font-size:30px;
+}
+.right{
+    display:flex;
+    justify-content:flex-end;
+    flex:auto;
+    align-items: center;
+    width: 86;
+    height: 34;
+    padding: 10px;
+}
+.item{
+    margin-left: 10px;
+}
+.title{
+    background-image: url("[orig] welcome image.png");
+    position: fixed;
+    top: 54px;      /* 關鍵：從導覽列下方開始顯示 */
+    left: 0;
+    width: 100%;
+    height: 320px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 1500;  /* 層級低於 Navbar，但高於內容 */
+    display: flex;
+    align-items: center;
+}
+
+.title-container{
+    max-width: 1200px; 
+    margin: auto; 
+    width: 100%;
+}
+.title-content{
+    color: white;
+    margin-top: 10px;
+    font-weight: bold;
+    
+}
+
+.select-btn{
+    width: 460px;
+    height: 46px;
+    max-width: 460px;
+    display:flex;
+    align-items:center;
+    margin-top: 20px;
+
+
+}
+
+.select-cat{
+    height: 46px;
+    width:100px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border:none;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    font-size:15px;
+    font-weight: bold;
+
+}
+.search-bar{
+    height: 46px;
+    border:none;
+    width:300px;
+    outline: none; 
+    padding: 0 15px;  
+    font-size: 15px;
+}
+.item{ 
+    margin-right: 10px;
+}
+
+.search-btn{
+    height:46px;
+    width:60px;
+    background-color:#448899;
+    border:none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-right-radius: 5px ;
+    border-top-right-radius: 5px ;
+    padding:10px 20px 10px 20px;
+
+}
+.select-cat-container {
+    position: relative; 
+}
+
+.select-cat-options{
+    display:none;
+    position:absolute;
+    grid-template-columns: 1fr 1fr 1fr;
+    top:5px;
+    height:auto;
+    width:300px;
+    z-index:3000;
+    background-color: white;
+    box-shadow:0px 4px 15px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    justify-items: center; 
+    align-items: center;
+
+}
+
+.category{
+    width:100%;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 14px; 
+
+}
+.category:hover{
+    background-color: #EEEEEE;
+    border-radius: 8px;
+}
+
+.main{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+.main-container{
+    margin-top: 330px;
+}
+
+.list-bar{
+    max-width: 1200px;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    background-color: white;
+    z-index:10;
+    height: 120px;
+    
+}
+.list-bar-content{
+    white-space: nowrap; 
+    overflow: hidden;  
+    margin: 0px 10px;
+    
+    
+}
+.list-bar-left{
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border:none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/static/States=Default-left.png');
+    
+}
+.list-bar-left:hover{
+    background-image: url('/static/States=Hovered-left.png');
+
+}
+
+.list-bar-right{
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    background-image: url('/static/States=Default-right.png');
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.list-bar-right:hover{
+    background-image: url('/static/States=Hovered-right.png');
+}
+
+.mrt{
+    margin:0px 10px;
+    color:gray;
+}
+
+.mrt:hover{
+    color:black;
+}
+
+
+#main-pic {
+    margin-top:130px;
+    max-width: 1200px;
+    display:grid;
+    gap:20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.attraction-card{
+    border: 2px solid #E8E8E8; 
+    border-radius: 10px;    
+    overflow: hidden;
+}
+.img-container{
+    position: relative;
+    height:200px;
+
+}
+.pic{
+    height:200px;
+    width:300px;
+}
+
+.text{
+    color:white;
+    font-size: 20px; 
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom:0px;  
+    left:0px;
+    right:0px;
+    padding:10px;
+    margin:0px;
+    z-index: 1;
+    overflow:hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: bold;
+}
+
+.card-info{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    margin:10px 10px;
+    color: gray;
+    font-weight:bold;
+    font-size:20px;
+    
+}
+
+
+footer div{
+    z-index:999;
+    width:100%;
+    bottom:0;
+    height:104px;
+    background: #757575;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color:white;
+    left:0;
+    font-weight: bold;
+    margin-top: 50px;
+} 
