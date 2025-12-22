@@ -39,7 +39,6 @@ const options = {
 const observer = new IntersectionObserver(
     (entries) => {
         entries.forEach((entry) => {
-            // 降低門檻 threshold 從 1 改成 0.1
             if (entry.isIntersecting && !isLoading && nextPage !== null) {
                 loadMore();
             }
@@ -168,7 +167,7 @@ async function inputkeyword(event){
 
 async function filter() {
     currentKeyword = document.querySelector("#search").value;
-    // 獲取當前按鈕的 id
+
     const catButton = document.querySelector(".select-cat");
     const currentCategory = catButton.id;
 
@@ -177,10 +176,10 @@ async function filter() {
     const container = document.querySelector("#main-pic");
     container.innerHTML = ""; 
     
-    // 基礎 URL
+   
     let url = `/api/attractions?page=${nextPage}&keyword=${currentKeyword}`;
     
-    // 修正：同時排除 "全部分類" 和 初始 ID "select-btn"
+  
     if (currentCategory && currentCategory !== "全部分類" && currentCategory !== "select-btn") {
         url += `&category=${currentCategory}`;
     }
@@ -208,7 +207,7 @@ async function filter() {
             nextPage = res.nextPage; 
             observer.observe(infiniteWrap); 
         } else {
-            // 如果沒資料，至少清空容器或顯示提示
+            
             container.innerHTML = "<div style='grid-column: 1/-1; text-align: center; margin-top: 30px; color: gray;'>查無資料</div>";
             nextPage = null;
         }

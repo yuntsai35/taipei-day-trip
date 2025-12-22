@@ -149,7 +149,6 @@ body {
 .main {
     display: flex;
     justify-content: center;
-    /* 移除 align-items: center; */
     margin-top: 40px;
     width: 100%;
 }
@@ -158,22 +157,22 @@ body {
 }
 
 .list-bar {
-    width: 100%;             /* 確保寬度撐滿視窗 */
-    max-width: 1200px;       /* 限制最大寬度與內容區一致 */
-    left: 50%;               /* 移動到視窗中間 */
-    transform: translateX(-50%); /* 向左偏移自身寬度的一半，達成正中心對齊 */
+    width: 100%;             
+    max-width: 1200px;       
+    left: 50%;             
+    transform: translateX(-50%); 
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: white;
-    position: fixed;         /* 固定在頁面 */
+    position: fixed;        
     z-index: 10;
     height: 120px;
-    box-sizing: border-box;  /* 防止內邊距撐破寬度 */
+    box-sizing: border-box;  
 }
 
 .list-bar-content {
-    flex: 1;                 /* 讓中間的文字區塊自動伸縮，填滿按鈕間的空間 */
+    flex: 1;                 
     overflow-x: auto;
     white-space: nowrap; 
     margin: 0px 10px;
@@ -182,22 +181,22 @@ body {
 }
 
 .list-bar {
-    width: 100%;             /* 確保寬度撐滿視窗 */
-    max-width: 1200px;       /* 限制最大寬度與內容區一致 */
-    left: 50%;               /* 移動到視窗中間 */
-    transform: translateX(-50%); /* 向左偏移自身寬度的一半，達成正中心對齊 */
+    width: 100%;             
+    max-width: 1200px;      
+    left: 50%;              
+    transform: translateX(-50%); 
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: white;
-    position: fixed;         /* 固定在頁面 */
+    position: fixed;         
     z-index: 10;
     height: 120px;
-    box-sizing: border-box;  /* 防止內邊距撐破寬度 */
+    box-sizing: border-box;  
 }
 
 .list-bar-content {
-    flex: 1;                 /* 讓中間的文字區塊自動伸縮，填滿按鈕間的空間 */
+    flex: 1;                 
     overflow-x: auto;
     white-space: nowrap; 
     margin: 0px 10px;
@@ -262,10 +261,10 @@ body {
     max-width: 1200px;
     display: grid;
     gap: 20px;
-    /* 修改這裡：最少 270px，最多平分剩餘空間 */
+    
     grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); 
     width: 100%;
-    padding: 0 15px; /* 增加兩側間距避免貼邊 */
+    padding: 0 15px;
     box-sizing: border-box;
 }
 
@@ -281,8 +280,8 @@ body {
 .pic {
     height: 200px;
     width: 100%;
-    object-fit: cover; /* 確保圖片不變形 */
-    border-radius: 10px 10px 0 0; /* 配合卡片圓角 */
+    object-fit: cover; 
+    border-radius: 10px 10px 0 0; 
 }
 
 .text{
@@ -325,9 +324,9 @@ footer div{
     margin-top: 40px;
 }
 #js-detective {
-    height: 10px; /* 確保有高度 */
+    height: 10px; 
     width: 100%;
-    background: transparent; /* 保持透明 */
+    background: transparent; 
 }
 
 @media (max-width: 600px) {
