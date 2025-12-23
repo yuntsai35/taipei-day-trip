@@ -66,6 +66,7 @@ async function loadMore() {
             res.data.forEach((data) => {
                 const card = document.createElement("div");
                 card.className = "attraction-card";
+                card.id=data.id;
                 card.innerHTML = `
                     <div class="img-container">
                         <img class="pic" src="${data.images[0]}" alt="">

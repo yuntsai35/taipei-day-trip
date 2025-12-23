@@ -372,13 +372,15 @@ footer div{
 }
 
 
-@media (max-width: 500px) {
-    .item {
-        display: inline-block;
-        width: 2.5em;  
-        white-space: normal; 
-        text-align: center;
-        line-height: 1.2;
+@media (min-width: 360px) and (max-width: 500px) {
+    .navbar-container {
+        width: 90%;
+        white-space: nowrap;
+}
+
+    .left, .right {
+        flex: 1; 
+        display: flex;
     }
 
     .title {
@@ -401,18 +403,24 @@ footer div{
         width: 100%;           
         max-width: none; 
     }
+
+    .search-bar{
+             
+        min-width: 0;      
+        }
     
     .select-btn {
         width: 100%;           
         max-width: 400px;      
         margin-top: 25px;
     }
+    
     .select-cat{
         display: inline-block;
-        width: 4em;  
         white-space: normal; 
         text-align: center;
         line-height: 1.2;
+        white-space: nowrap;
     }
 
     .search-bar {
