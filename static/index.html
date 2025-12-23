@@ -23,7 +23,7 @@
     <div class="title-content" style="font-size: 30px;">輕鬆享受台北一日悠閒</div>
     <div class="title-content" style="font-size: 17px;">探索每個角落，體驗城市的深度旅遊行程</div>
     <div class="select-btn">
-      <button class="select-cat" onclick=showSidebar()>全部分類 ▼</button><input class="search-bar" type="text" name="search" id="search" placeholder="輸入景點名稱查詢"><button class="search-btn"><img src="/static/search.png"></button>
+      <button class="select-cat" id="select-btn" onclick=showSidebar()>全部分類 ▼</button><input class="search-bar" type="text" name="search" id="search" placeholder="輸入景點名稱查詢"><button class="search-btn" onclick=filter()><img src="/static/search.png"></button>
     </div>
     <div class="select-cat-container">
     <div class="select-cat-options" id="options">
@@ -37,18 +37,20 @@
     <div class="main-container">
 
       <div class="list-bar">
-      <button class="list-bar-left"></button><div class="list-bar-content" id="list-bar-content"></div><button class="list-bar-right"></button>
+      <button class="list-bar-left"></button>
+      <div class="list-bar-content" id="list-bar-content"></div>
+      <button class="list-bar-right"></button>
       </div>
     
     <div class="main-pic" id="main-pic">
         
     </div>
-    </div>
+    
   </div>
-
+  </div>
+  <div id="js-detective"></div>
   <footer>
     <div> COPYRIGHT &COPY; 2021台北一日遊</div>
-
   </footer>
   
 </body>
