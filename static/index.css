@@ -373,6 +373,14 @@ footer div{
 
 
 @media (max-width: 600px) {
+    .item {
+        display: inline-block;
+        width: 2.5em;  
+        white-space: normal; 
+        text-align: center;
+        line-height: 1.2;
+    }
+
     .title {
         display: flex;
         justify-content: center; 
@@ -391,16 +399,20 @@ footer div{
 
     .title-content {
         width: 100%;           
-        max-width: none;       
-        white-space: nowrap;   
-       
+        max-width: none; 
     }
     
     .select-btn {
         width: 100%;           
         max-width: 400px;      
         margin-top: 25px;
-        justify-content: flex-start; 
+    }
+    .select-cat{
+        display: inline-block;
+        width: 4em;  
+        white-space: normal; 
+        text-align: center;
+        line-height: 1.2;
     }
 
     .search-bar {
