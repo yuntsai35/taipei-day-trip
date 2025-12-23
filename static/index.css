@@ -372,7 +372,7 @@ footer div{
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
     .item {
         display: inline-block;
         width: 2.5em;  
