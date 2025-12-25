@@ -41,7 +41,6 @@ async function getId(){
         `;
     title.appendChild(titleInfo);
 
-
     const pictures = document.querySelector(".list-bar-picture");
     const  pic= document.createElement("div");
     pic.className = "main-top-left-pic";
@@ -53,6 +52,22 @@ async function getId(){
         `;
         pic.innerHTML = allImagesHtml;
         pictures.appendChild(pic);})
+        
+
+    const picture_amount=result.data.images.length;   
+    const scrollBar=document.querySelector(".scroll-bar"); 
+    const scrollTrack = document.querySelector(".my-scroll");
+    const thumbWidthPercent = (1 / picture_amount) * 100;
+    scrollBar.style.width = thumbWidthPercent + "%";
+
+    pic.addEventListener('scroll', function() {
+    const maxScroll = this.scrollWidth - this.clientWidth;
+    const scrollPercent = this.scrollLeft / maxScroll;
+    const moveRange = scrollTrack.clientWidth - scrollBar.clientWidth;
+    const barMove = scrollPercent * moveRange;
+    scrollBar.style.transform = `translateX(${barMove}px)`;
+});
+
 
     const listBarPicture = document.querySelector(".main-top-left-pic");
     const btnLeft = document.querySelector(".list-bar-left");
@@ -61,14 +76,14 @@ async function getId(){
 
     btnLeft.addEventListener("click", () => {
         listBarPicture.scrollBy({
-            left: -300,
+            left: -500,
             behavior: 'smooth' 
         });
     });
 
     btnRight.addEventListener("click", () => {
         listBarPicture.scrollBy({
-            left: 300,
+            left: 500,
             behavior: 'smooth'
         });
     });
