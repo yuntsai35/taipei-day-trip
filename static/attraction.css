@@ -1,0 +1,365 @@
+body {
+    margin: 0;       
+    padding: 0;
+}
+.navbar{
+    display:flex;
+    height:54px;
+    align-items: center;
+    justify-content: center;
+    top:0;
+    left:0;
+    width:100%;
+    background-color: white;
+    border-bottom:1px solid #E8E8E8;
+    position:fixed;
+    z-index: 100;   
+
+}
+.navbar-container{
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+.left{
+    flex:none;
+    width:200px;
+    font-weight: bold;
+    color:#448899;
+    font-size:30px;
+}
+.right{
+    display:flex;
+    justify-content:flex-end;
+    align-items: center;
+    width: 86;
+    height: 34;
+    padding:10px
+}
+.item{
+    margin-left: 10px;
+}
+
+.main{
+    padding-top:60px;
+    color:#757575;
+    display:flex;
+    width:100%;
+    align-items: center;
+    justify-content: center;
+}
+.main-container{
+    max-width: 1200px;
+}
+
+.main-top-container{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.main-top-left {
+    position: relative; 
+    display: flex;
+    align-items: center;
+}
+
+.list-bar-left, .list-bar-right {
+    position: absolute; 
+    top: 50%;         
+    width: 32px;
+    height: 32px;
+    z-index: 10;     
+}
+
+.list-bar-left {
+    left: 10px; 
+    border-radius: 50px;
+    opacity: 0.7;
+}
+
+.list-bar-right {
+    right: 10px;
+    border-radius: 50px; 
+    opacity: 0.7;
+}
+
+
+.main-top-left-pic {
+    width: 540px;        
+    display: flex;       
+    overflow-x: auto;  
+    gap: 4vw;
+    padding-left: 0;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+}
+
+.main-top-left-pic::-webkit-scrollbar {
+    display: none;
+}
+
+
+.pic{
+    padding:0;
+    text-align:center;
+    align-content:center;
+    width: 540px;
+    height: 400px;
+    flex-shrink: 0;
+    list-style-type: none;
+    flex: 0 0 100%;
+    padding-top: 20px;
+    scroll-snap-align: start;
+    text-align: center;
+}
+
+
+.list-bar-left{
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border:none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('/static/States=Default-left.png');
+    
+}
+.list-bar-left:hover{
+    background-image: url('/static/States=Hovered-left.png');
+
+}
+
+.list-bar-right{
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    background-image: url('/static/States=Default-right.png');
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.list-bar-right:hover{
+    background-image: url('/static/States=Hovered-right.png');
+}
+
+
+
+.main-top-right{
+    margin-left: 20px;
+}
+
+.main-top-right-detail{
+ 
+    top: 90px;
+}
+
+.main-top-right-reserve{
+    background-color: #E8E8E8;
+    width: 570px;
+    height:auto;
+    border-radius: 5px;
+    padding:20px;
+
+}
+
+
+.reserve-item-title{
+    font-weight: bold;
+    padding-bottom: 10px;
+
+}
+
+.reserve-item{
+    padding: 13px 0px;
+    margin-right: 5px;
+}
+
+.reserve-date, .reserve-time, .reserve-fee{
+    display:flex;
+    align-items: center;
+}
+.reserve-date{
+    padding:10px 0px;
+}
+
+.reserve-date-input {
+    position: relative;     /* 讓內部的指示器可以絕對定位 */
+    width: 193px;           /* 修正：務必加上 px */
+    height: 35px;          /* 修正：務必加上 px */
+    border: none;
+    padding: 0 10px;
+    background-color: white;
+    cursor: pointer;
+    
+    /* 設定你想要的自定義日曆圖案 */
+    background-image: url('/static/calendar.png'); 
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+}
+
+/* 讓原生的日曆按鈕「透明」並「鋪滿」整個 input */
+.reserve-date-input::-webkit-calendar-picker-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0; /* 關鍵：變成透明，但它還在那裡 */
+}
+
+.radio-container{
+    display:flex;
+}
+
+
+
+input[type="radio"] {
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+
+}
+
+input[type="radio"]:checked {
+    background-color: #448899;
+    box-shadow: inset 0 0 0 2px #FFFFFF;
+}
+
+
+.reserve-btn{
+    color:white;
+    background-color:#448899;
+    border:none;
+    padding:5px 10px;
+    border-radius: 5px;
+    font-size: 19px;
+    
+}
+
+.titleLocation{
+    display:flex;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.titleLocation-cat, .titleLocation-preposition{
+    padding-right: 5px;
+}
+
+.titleLocation-preposition{
+    font-size: 18px;
+}
+
+.reserve-item, .titleName, .address-title, .transport-title {
+    font-weight: bold;
+}
+
+.address-title, .transport-title{
+    margin: 5px 0px;
+}
+
+.titleName{
+    font-size: 24px;
+    margin: 20px 0px;
+}
+
+hr {
+    border-top: 1px #E8E8E8; 
+}
+
+.description, .container-address, .container-transport{
+    margin-top: 40px;
+}
+
+.description{
+    line-height:2;
+}
+.transport-content{
+    line-height:2;
+}
+
+.container-transport{
+    margin-bottom: 60px;
+}
+
+footer div{
+    width: 100%;
+    height: 104px;
+    background-color: #757575;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-top: 40px;
+}
+
+@media (min-width: 360px) and (max-width: 1200px) {
+    .navbar{
+        flex-wrap: nowrap
+    }
+    .navbar-container {
+        padding: 0 10px;
+    }
+    .left {
+        font-size: 24px;
+        width: auto;
+    }
+    .main{
+        padding-top:30px;
+    }
+
+    .main-top-container {
+        display: block;
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .main-top-left, 
+    .main-top-left-pic, 
+    .pic {
+        width: 100%; 
+        object-fit:cover; 
+    }
+
+    .main-top-right {
+        margin-left: 0;
+        padding: 10px 15px;
+    }
+    
+    .titleName{
+        margin-bottom: 10px;
+    }
+
+    .main-top-right-reserve {
+        width: auto;        
+        margin: 20px 0;     
+        padding: 15px 20px;
+    }
+
+    .main-bottom-container {
+        padding: 0 15px;
+    }
+}
