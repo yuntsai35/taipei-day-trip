@@ -199,22 +199,19 @@ body {
 }
 
 .reserve-date-input {
-    position: relative;     /* 讓內部的指示器可以絕對定位 */
-    width: 193px;           /* 修正：務必加上 px */
-    height: 35px;          /* 修正：務必加上 px */
+    position: relative;     
+    width: 193px;           
+    height: 35px;          
     border: none;
     padding: 0 10px;
     background-color: white;
     cursor: pointer;
-    
-    /* 設定你想要的自定義日曆圖案 */
     background-image: url('/static/calendar.png'); 
     background-repeat: no-repeat;
     background-position: right 10px center;
     background-size: 20px;
 }
 
-/* 讓原生的日曆按鈕「透明」並「鋪滿」整個 input */
 .reserve-date-input::-webkit-calendar-picker-indicator {
     position: absolute;
     top: 0;
@@ -224,7 +221,7 @@ body {
     margin: 0;
     padding: 0;
     cursor: pointer;
-    opacity: 0; /* 關鍵：變成透明，但它還在那裡 */
+    opacity: 0; 
 }
 
 .radio-container{
