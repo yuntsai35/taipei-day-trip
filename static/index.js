@@ -9,6 +9,8 @@ async function attraction_information() {
 
     result.data.forEach((data) => {
         const card = document.createElement("div");
+        card.id = `${data.id}`;
+        card.onclick= getcardinfo;
         card.className = "attraction-card";
         card.innerHTML = `
                 <div class="img-container">
@@ -65,8 +67,9 @@ async function loadMore() {
         if (res.data) {
             res.data.forEach((data) => {
                 const card = document.createElement("div");
+                card.id = `${data.id}`;
+                card.onclick= getcardinfo;
                 card.className = "attraction-card";
-                card.id=data.id;
                 card.innerHTML = `
                     <div class="img-container">
                         <img class="pic" src="${data.images[0]}" alt="">
@@ -192,6 +195,8 @@ async function filter() {
         if (res.data && res.data.length > 0) {
             res.data.forEach((data) => {
                 const card = document.createElement("div");
+                card.id = `${data.id}`;
+                card.onclick= getcardinfo;
                 card.className = "attraction-card";
                 card.innerHTML = `
                     <div class="img-container">
@@ -238,3 +243,12 @@ const btnRight = document.querySelector(".list-bar-right");
             behavior: 'smooth'
         });
     });
+
+function getcardinfo(event) {
+    const id = event.currentTarget.id;
+    window.location.href = `/attraction/${id}`;
+}
+
+document.querySelector(".left").onclick = () => {
+    window.location.href = "/";
+};

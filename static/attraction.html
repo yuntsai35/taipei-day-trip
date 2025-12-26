@@ -4,8 +4,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Attraction</title>
+  <link rel="stylesheet" href="/static/attraction.css">
 </head>
 <body>
-  
+  <header>
+    <div class="navbar">
+      <div class="navbar-container">
+      <div class="left">台北一日遊</div>
+      <div class="right">
+        <div class="item">預定行程</div>
+        <div class="item">登入/註冊</div>
+      </div>
+      </div>
+    </div>
+  </header>
+  <div class="main">
+    <div class="main-container">
+    <div class="main-top-container">
+      <div class="main-top-left">
+        <button class="list-bar-left"></button>
+        <div class="list-bar-picture" id="list-bar-picture"></div>
+        <button class="list-bar-right"></button>
+        
+        <div class="my-scroll">
+          <div class="scroll-bar" id="draggable"></div>
+        </div>
+      </div>
+      <div class="main-top-right">
+        <div class="main-top-right-info">
+         
+        </div>
+        <div class="main-top-right-reserve">
+          <div class="reserve-item-title">訂購導覽行程</div>
+          <div>以此景點為中心的一日行程，帶您探索城市角落故事</div>
+          <div class="reserve-date">
+          <div class="reserve-item">選擇日期:</div>
+          <input type="date" class="reserve-date-input" placeholder="yyyy/mm/dd">
+          </div>
+          <div class="reserve-time">
+            <div class="reserve-item">選擇時間:</div>
+            <div class="radio-container">
+              <input type="radio" id="am" name="reserve" checked>
+              <div class="reserve-time-item">上半天</div>
+
+              <input type="radio" id="pm" name="reserve">
+              <div class="reserve-time-item">下半天</div>
+            </div>
+          </div>
+          <div class="reserve-fee">
+          <div class="reserve-item">導覽費用:</div>
+          <div class="reserve-fee-number"></div>
+          </div>
+          <button class="reserve-btn">開始預約行程</button>
+        </div>
+      </div>
+
+    </div>
+    
+    <hr>
+
+    <div class="main-bottom-container">
+
+
+    </div>
+    </div>
+  </div>
+
+  <footer>
+    <div> COPYRIGHT &COPY; 2021台北一日遊</div>
+  </footer>
 </body>
+<script src="/static/attraction.js"></script>
 </html>
