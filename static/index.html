@@ -13,10 +13,35 @@
       <div class="left">台北一日遊</div>
       <div class="right">
         <div class="item">預定行程</div>
-        <div class="item">登入/註冊</div>
+        <div class="item" id="item" onclick="showlogin()">登入/註冊</div>
       </div>
       </div>
     </div>
+    <div class="login-container">
+      <div class="login" id="login">
+        <div class="decoration-bar"></div>
+        <img onclick=hide() class="hide" src="/static/close.png">
+        <div class="login-title">登入會員帳號</div>
+        <input class="login-email" placeholder="輸入電子信箱">
+        <input class="login-password" placeholder="輸入密碼">
+        <button class="login-account" onclick="login()">登入帳戶</button>
+        <div id="login-hint"></div>
+        <div>還沒有帳戶 ?<button class="signupbtn" onclick="showsignup()">點此註冊</button></div>
+      </div>
+      </div>
+      <div class="signup-container">
+      <div class="signup" id="signup">
+        <div class="decoration-bar"></div>
+        <img onclick=hide() class="hide" src="/static/close.png">
+        <div class="signup-title">註冊會員帳號</div>
+        <input class="signup-name" placeholder="輸入姓名">
+        <input class="signup-email" placeholder="輸入電子信箱">
+        <input class="signup-password" placeholder="輸入密碼">
+        <button class="signup-account" onclick="signup()">註冊新帳戶</button>
+        <div id="signup-hint"></div>
+        <div>已經有帳戶了 ?<button class="signinbtn" onclick="showlogin()">點此登入</button></div>
+      </div>
+      </div>
   </header>
   <div class="title">
     <div class="title-container">

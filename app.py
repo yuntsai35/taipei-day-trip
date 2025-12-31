@@ -11,9 +11,13 @@ con = mysql.connector.connect(
 )
 print("database ready")
 
-from fastapi import *
+from fastapi import * 
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+import json
+import jwt
+import time, datetime
+from datetime import timezone
 app=FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -31,6 +35,101 @@ async def booking(request: Request):
 @app.get("/thankyou", include_in_schema=False)
 async def thankyou(request: Request):
 	return FileResponse("./static/thankyou.html", media_type="text/html")
+
+
+@app.post("/api/user")
+async def signup(body: dict = Body(...)):
+
+    name=body["name"]
+    email=body["email"].lower()
+    password=body["password"]
+
+    cursor = con.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM member WHERE email=%s",[email])
+    result=cursor.fetchone()
+    try:
+        if result==None:
+            cursor.execute("INSERT INTO member (name,email,password) VALUES (%s,%s,%s)",[name,email,password])
+            con.commit()
+            return{"ok":True}
+        else:
+            raise HTTPException(
+				status_code=400,
+				detail={
+					"error": True,
+					"message": "註冊失敗，重複的 Email 或其他原因"
+				}
+			)
+    except HTTPException as e:
+        raise e
+    
+    except HTTPException as e:
+            raise HTTPException(
+				status_code=500,
+				detail={
+					"error": True,
+					"message": "伺服器內部錯誤"
+				}
+			)
+         
+@app.get("/api/user/auth")
+async def checkLoginStatus(request:Request):
+    bearerToken = request.headers.get("Authorization")
+    if bearerToken:
+        try:
+            token = bearerToken.split(" ")
+
+            payload = jwt.decode(token[1], os.getenv("SECRET_PASSWORD"), algorithms=["HS256"])
+            return {
+                    "data": {
+                        "id": payload["id"],
+                        "name": payload["name"],
+                        "email": payload["email"]
+                    }
+                }
+        except(jwt.ExpiredSignatureError, jwt.InvalidTokenError):
+            return {"data": None}
+
+    else:
+        return {"data": None}
+
+@app.put("/api/user/auth")
+async def login(request:Request,body: dict = Body(...)):
+    
+    email=body["email"]
+    password=body["password"]
+
+    cursor=con.cursor()
+    cursor.execute("SELECT * FROM member WHERE email=%s AND password=%s",[email,password])
+    result=cursor.fetchone()
+
+    try:
+        if result:
+            payload={"id":result[0],"name":result[1],"email":result[2], "exp": datetime.datetime.now(tz=timezone.utc) + datetime.timedelta(days=7)}
+            token = jwt.encode(payload, os.getenv("SECRET_PASSWORD"), algorithm='HS256')
+            return {"token": token}
+        
+        else:
+                raise HTTPException(
+                    status_code=400,
+                    detail={
+                        "error": True,
+                        "message": "登入失敗，帳號或密碼錯誤或其他原因"
+                    }
+                )
+        
+    except HTTPException as e:
+        raise e
+    
+    except HTTPException as e:
+            raise HTTPException(
+				status_code=500,
+				detail={
+					"error": True,
+					"message": "伺服器內部錯誤"
+				}
+			)
+
 
 @app.get("/api/attractions")
 async def attraction(request: Request,page:int=0,category:str|None=None, keyword:str|None=None):
