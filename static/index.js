@@ -255,9 +255,11 @@ document.querySelector(".left").onclick = () => {
 
 
 function showlogin() {
+    const outer = document.getElementById("login-outer");
     const signup = document.getElementById("signup");
     const login = document.getElementById("login");
     if (login.style.display == "none") {
+        outer.style.display = "block";
         login.style.display = "flex";
         signup.style.display = "none";
     } else {
@@ -266,9 +268,11 @@ function showlogin() {
 }
 
 function showsignup(){
+    const outer = document.getElementById("login-outer");
     const signup = document.getElementById("signup");
     const login = document.getElementById("login");
     if (signup.style.display== "none"){
+        outer.style.display = "block";
         signup.style.display = "flex";
         login.style.display="none";
     }else{
@@ -278,10 +282,12 @@ function showsignup(){
 }
 
 function hide(){
+    const outer = document.getElementById("login-outer");
     const signup = document.getElementById("signup");
     const login = document.getElementById("login");
-    signup.style.display='none'
-    login.style.display='none'
+    outer.style.display = "none";
+    signup.style.display='none';
+    login.style.display='none';
 }
 
 async function signup(){
