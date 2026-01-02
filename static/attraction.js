@@ -170,7 +170,7 @@ async function signup(){
         hint.innerHTML = "註冊成功！";
         hint.style.color = "red"; 
     }else{
-        hint.innerHTML = result.detail.message;
+        hint.innerHTML = result.message;
         hint.style.color = "red";
     }
     }
@@ -200,7 +200,7 @@ async function login(){
         window.location.reload();
         checkLoginStatus();
     }else{
-        hint.innerHTML = result.detail.message;
+        hint.innerHTML = result.message;
         hint.style.color = "red";
     }
     }
