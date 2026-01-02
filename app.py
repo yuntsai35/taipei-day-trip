@@ -14,6 +14,7 @@ print("database ready")
 from fastapi import * 
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.responses import JSONResponse
 import json
 import jwt
 import time, datetime
@@ -53,20 +54,17 @@ async def signup(body: dict = Body(...)):
             con.commit()
             return{"ok":True}
         else:
-            raise HTTPException(
+            return JSONResponse(
 				status_code=400,
-				detail={
+				content={
 					"error": True,
 					"message": "註冊失敗，重複的 Email 或其他原因"
 				}
 			)
-    except HTTPException as e:
-        raise e
-    
-    except HTTPException as e:
-            raise HTTPException(
+    except Exception as e:
+            return JSONResponse(
 				status_code=500,
-				detail={
+				content={
 					"error": True,
 					"message": "伺服器內部錯誤"
 				}
@@ -110,21 +108,19 @@ async def login(request:Request,body: dict = Body(...)):
             return {"token": token}
         
         else:
-                raise HTTPException(
+                return JSONResponse(
                     status_code=400,
-                    detail={
+                    content={
                         "error": True,
                         "message": "登入失敗，帳號或密碼錯誤或其他原因"
                     }
                 )
         
-    except HTTPException as e:
-        raise e
     
-    except HTTPException as e:
-            raise HTTPException(
+    except Exception as e:
+            return JSONResponse(
 				status_code=500,
-				detail={
+				content={
 					"error": True,
 					"message": "伺服器內部錯誤"
 				}
