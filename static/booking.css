@@ -343,20 +343,15 @@ button{
     .bookingifo-right {
         width: 100%;
     }
-
     
     .delete {
-        top: auto;
-        bottom: 0;
-        right: 0;
+       position: static;  
+        align-self: flex-end;  
+        width: 30px;
+        height: 30px;
+  
     }
     .main-price-container {
         align-items: flex-end;
     }
-
-    .main-price-btn {
-        width: 173px; 
-        height: 36px;
-    }
-    
 }
