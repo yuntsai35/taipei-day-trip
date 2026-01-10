@@ -380,10 +380,6 @@ function signOut() {
 
 async function reservation() {
     const token = localStorage.getItem("token"); 
-    if (!token) {
-        showlogin();
-        return;
-    }
 
     let response = await fetch("/api/user/auth", {
         method: "GET",

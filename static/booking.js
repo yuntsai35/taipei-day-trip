@@ -197,10 +197,10 @@ async function getreservationinfo(){
                     </div>
                     <div class="bookingifo-right">
                         <div class="booking-title">台北一日遊: ${data.name}</div>
-                        <div class="info">日期: ${result.date}</div>
-                        <div class="info">時間: ${timeChange}</div>
-                        <div class="info">費用: 新台幣${result.price}元</div>
-                        <div class="info">地點: ${data.address}</div>
+                        <div class="booking-info">日期: ${result.date}</div>
+                        <div class="booking-info">時間: ${timeChange}</div>
+                        <div class="booking-info">費用: 新台幣${result.price}元</div>
+                        <div class="booking-info">地點: ${data.address}</div>
                         <img onclick=deletereservationinfo() class="delete" src="/static/delete.png">
                     </div>
                     </div>
