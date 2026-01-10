@@ -4,8 +4,99 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Booking</title>
+  <link rel="stylesheet" href="/static/booking.css">
 </head>
 <body>
-  
+  <header>
+    <div class="navbar">
+      <div class="navbar-container">
+      <div class="left">台北一日遊</div>
+      <div class="right">
+        <div class="item">預定行程</div>
+        <div class="item" id="item" onclick="showlogin()">登入/註冊</div>
+      </div>
+      </div>
+    </div>
+    <div class="login-outer" id="login-outer">
+    <div class="login-container">
+      <div class="login" id="login">
+        <div class="decoration-bar"></div>
+        <img onclick=hide() class="hide" src="/static/close.png">
+        <div class="login-title">登入會員帳號</div>
+        <input class="login-email" placeholder="輸入電子信箱">
+        <input type="password" class="login-password" placeholder="輸入密碼">
+        <button class="login-account" onclick="login()">登入帳戶</button>
+        <div id="login-hint"></div>
+        <div>還沒有帳戶 ?<button class="signupbtn" onclick="showsignup()">點此註冊</button></div>
+      </div>
+      </div>
+      <div class="signup-container">
+      <div class="signup" id="signup">
+        <div class="decoration-bar"></div>
+        <img onclick=hide() class="hide" src="/static/close.png">
+        <div class="signup-title">註冊會員帳號</div>
+        <input class="signup-name" placeholder="輸入姓名">
+        <input class="signup-email" placeholder="輸入電子信箱">
+        <input type="password" class="signup-password" placeholder="輸入密碼">
+        <button class="signup-account" onclick="signup()">註冊新帳戶</button>
+        <div id="signup-hint"></div>
+        <div>已經有帳戶了 ?<button class="signinbtn" onclick="showlogin()">點此登入</button></div>
+      </div>
+      </div>
+      </div>
+  </header>
+  <div class="main">
+      <div class="main-container">
+        <div class="main-top-container">
+          
+
+        </div>
+        <div class="booking-information">
+        <hr>
+        <div class="main-mid-container">
+          <div class="title">您的聯絡資訊</div>
+            <div class="group">
+              <div class="detail">聯絡姓名:</div>
+              <input type="text" id="bookingname">
+            </div>  
+            <div class="group">
+              <div class="detail">聯絡信箱:</div>
+              <input type="email" id="bookingemail">
+            </div>
+            <div class="group">
+              <div class="detail">手機號碼:</div>
+              <input type="tel">
+            </div>
+          <div class="title">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</div>
+        </div>
+        <hr>
+        <div class="main-bottom-container">
+          <div class="title">信用卡付款資訊</div>
+          <div class="group">
+            <div class="detail">卡片號碼:</div>
+            <input placeholder="**** **** **** ****">
+            </div>
+            <div class="group">
+            <div class="detail">過期時間:</div>
+            <input placeholder="MM/YY">
+            </div>
+            <div class="group">
+            <div class="detail">驗證密碼:</div>
+            <input placeholder="CVV">
+            </div>
+        </div>
+        <hr class="main-price-hr">
+        <div class="main-price-container">
+
+        </div>
+
+      </div>
+      </div>
+  </div>
+
+  <footer>
+    <div> COPYRIGHT &COPY; 2021台北一日遊</div>
+  </footer>
 </body>
+<script src="/static/booking.js"></script>
 </html>

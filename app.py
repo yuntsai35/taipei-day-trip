@@ -299,3 +299,116 @@ async def attraction(request: Request):
 					"message": "請依照情境提供對應的錯誤訊息"
 				}
 			)
+    
+@app.get("/api/booking")
+async def get_booking_info(request: Request):
+    bearerToken = request.headers.get("Authorization")
+    if not bearerToken:
+        return JSONResponse(
+				status_code=403,
+				content={
+					"error": True,
+					"message": "未登入系統，拒絕存取"})
+    
+    if bearerToken:
+        token = bearerToken.split(" ")
+
+        payload = jwt.decode(token[1], os.getenv("SECRET_PASSWORD"), algorithms=["HS256"])
+        id = payload["id"]
+
+    cursor=con.cursor(dictionary=True)
+    cursor.execute(" select attraction.attraction_id, attraction.name, attraction.address, attraction.images, booking.attractionId, booking.booking_date, booking.booking_time, booking.price from booking inner join attraction on booking.attractionId = attraction.attraction_id Where booking.member_id = %s",[id])
+    result=cursor.fetchone()
+    cursor.close()
+    if result:
+            images_list=[]
+            if result.get('images'):
+                  for img in result['images'].split('||'):
+                        if img.strip():
+                              images_list.append(img.strip())
+            return {"data":{
+					"id": result['attractionId'],
+					"name": result['name'],
+					"address": result['address'],
+					"images": images_list[0]},"date":result['booking_date'],"time":result['booking_time'],"price":result['price']}
+    else:
+         return {"data": None}
+     
+     
+@app.post("/api/booking")
+async def save_booking_info(request: Request,body: dict = Body(...)):
+
+    bearerToken = request.headers.get("Authorization")
+    if not bearerToken:
+        return JSONResponse(
+				status_code=403,
+				content={
+					"error": True,
+					"message": "未登入系統，拒絕存取"})
+
+    if bearerToken:
+        token = bearerToken.split(" ")
+
+        payload = jwt.decode(token[1], os.getenv("SECRET_PASSWORD"), algorithms=["HS256"])
+        id = payload["id"]
+
+    attractionId=body["attractionId"]
+    date=body["date"]
+    time=body["time"]
+    price=body["price"]
+
+    if not all([attractionId, date, time, price]):
+            return JSONResponse(
+                status_code=400,
+                content={"error": True, "message": "建立失敗，輸入不正確或其他原因"}
+            )
+
+    try:
+        cursor = con.cursor(dictionary=True)
+        cursor.execute("INSERT INTO booking (attractionId, member_id, booking_date, booking_time, price) VALUES (%s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE attractionId = VALUES(attractionId), booking_date = VALUES(booking_date),booking_time = VALUES(booking_time),price = VALUES(price)",[attractionId, id, date, time, price])
+        con.commit()
+        return{"ok":True}
+    
+    except jwt.PyJWTError:
+        return JSONResponse(
+            status_code=403,
+            content={"error": True, "message": "未登入系統，拒絕存取"}
+        )
+    
+    except Exception as e:
+            return JSONResponse(
+				status_code=500,
+				content={
+					"error": True,
+					"message": "伺服器內部錯誤"
+				}
+			)
+     
+     
+@app.delete("/api/booking")
+async def delete_booking(request: Request):
+    bearerToken = request.headers.get("Authorization")
+    if not bearerToken:
+        return JSONResponse(
+				status_code=403,
+				content={
+					"error": True,
+					"message": "未登入系統，拒絕存取"})
+
+    if bearerToken:
+        token = bearerToken.split(" ")
+        payload = jwt.decode(token[1], os.getenv("SECRET_PASSWORD"), algorithms=["HS256"])
+        id = payload["id"]
+
+    try:
+        cursor = con.cursor(dictionary=True)
+        cursor.execute("DELETE FROM booking WHERE member_id=%s",[id])
+        con.commit() 
+        cursor.close()
+        return {"ok":True}
+        
+    except jwt.PyJWTError: 
+        return JSONResponse(
+            status_code=403,
+            content={"error": True, "message": "未登入系統，拒絕存取"}
+        )

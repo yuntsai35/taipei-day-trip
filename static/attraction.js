@@ -232,3 +232,69 @@ function signOut() {
     localStorage.removeItem("token");
     location.reload();
 }
+
+async function reservation() {
+    const token = localStorage.getItem("token"); 
+
+    let response = await fetch("/api/user/auth", {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}` 
+        }
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.data !== null) {
+        window.location.href = "/booking";
+        
+    } else {
+        showlogin();
+    }
+}
+
+async function safereservationinfo(){
+    const token = localStorage.getItem("token"); 
+    if (!token) {
+        showlogin(); 
+        return;
+    }
+
+    let booking_date = document.querySelector(".reserve-date-input").value;
+    if (!booking_date) {
+        alert("請選擇日期");
+        return;
+    }
+
+    let time = document.querySelector('input[name="reserve"]:checked');
+    let timeValue;
+    let price;
+
+    if (time.id === "am") {
+        timeValue = "morning";
+        price=2000;
+
+    } else {
+        timeValue = "afternoon";
+        price=2500;
+    }
+
+    const s =window.location.pathname
+    const split_list = s.split('/')
+    const attractionId = split_list[2]
+    
+    let response=await fetch("/api/booking",{
+        method:"POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        body:JSON.stringify({"attractionId": attractionId,"date":booking_date,"time":timeValue,"price":price})
+    });
+    const result = await response.json();
+    if (response.ok) {
+        window.location.href = "/booking";
+    }else{
+        console.log(result);
+    }
+}
