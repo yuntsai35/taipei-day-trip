@@ -397,3 +397,4 @@ async function reservation() {
         showlogin();
     }
 }
+window.reservation = reservation;
