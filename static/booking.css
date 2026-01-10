@@ -59,7 +59,6 @@ footer div {
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    /* 這裡可以調整 margin-top 來決定 footer 離上方內容多近 */
     margin-top: 40px; 
 }
 
@@ -173,12 +172,12 @@ footer div {
 }
 
 .main {
-    padding-top: 54px; /* navbar 的高度 */
+    padding-top: 54px; 
     width: 100%;
-    background-color: white; /* 重點：內容區域維持白色背景 */
+    background-color: white; 
     display: flex;
     justify-content: center;
-    /* 確保這裡沒有 flex-grow: 1 */
+    
 }
 
 .main-container {
