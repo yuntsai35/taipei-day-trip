@@ -509,8 +509,11 @@ async def save_booking_info(request: Request,body: dict = Body(...)):
         
         if tp_status == 0:
                 cursor.execute("UPDATE orders SET status = 0 WHERE number = %s", [number])
-                con.commit()
                 
+                cursor.execute("DELETE FROM booking WHERE member_id=%s",[id])
+                con.commit() 
+                cursor.close()
+            
                 return {
                     "data": {
                         "number": number,
