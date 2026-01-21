@@ -1,0 +1,314 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #757575;
+}
+main {
+    flex: 1;
+    background-color: white; 
+}
+.navbar{
+    display:flex;
+    height:54px;
+    align-items: center;
+    justify-content: center;
+    top:0;
+    left:0;
+    width:100%;
+    background-color: white;
+    border-bottom:1px solid #E8E8E8;
+    position:fixed;
+    z-index: 100;   
+
+}
+.navbar-container{
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+}
+.left{
+    flex:none;
+    width:200px;
+    font-weight: bold;
+    color:#448899;
+    font-size:30px;
+}
+.right{
+    display:flex;
+    justify-content:flex-end;
+    align-items: center;
+    width: 86;
+    height: 34;
+    padding:10px
+}
+.item{
+    margin-left: 10px;
+}
+
+
+footer {
+    width: 100%;
+    background-color: #757575;
+
+}
+
+footer div {
+    width: 100%;
+    height: 104px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-top: 40px; 
+}
+
+.login-outer{
+    position:fixed;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index:2500;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    display:none;
+}
+
+.login-container{
+    position: absolute; 
+    z-index: 3000;
+}
+
+.login{
+    display:none;
+    width:340px;
+    height:auto;
+    background-color:white;
+    position:fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%); 
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    flex-direction: column; 
+    align-items: center;    
+    gap:10px;
+    
+    padding-bottom: 20px;
+}
+.login-title{
+    font-size: 24px;
+    color:gray;
+    font-weight:bold;
+}
+.login-email, .login-password, .login-account{
+    width:300px;
+    height:47px;
+}
+
+.login-account{
+    border:none;
+    background-color: #448899;
+    color:white;
+    border-radius:5px;
+    font-size: 16px;
+}
+.signupbtn, .signinbtn{
+    border:none;
+    background-color: white;
+}
+
+.signup-container{
+    position: relative; 
+    z-index: 3000;
+}
+
+.signup{
+    display:none;
+    width:340px;
+    height:auto;
+    background-color:white;
+    position:fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%); 
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    flex-direction: column; 
+    align-items: center;    
+    gap:10px;
+    padding-bottom: 20px;
+}
+
+.signup-title{
+    font-size: 24px;
+    color:gray;
+    font-weight:bold;
+}
+.signup-name, .signup-email, .signup-password, .signup-account{
+    width:300px;
+    height:47px;
+    
+}
+
+.signup-account{
+    border:none;
+    background-color: #448899;
+    color:white;
+    border-radius:5px;
+    font-size: 16px;
+}
+
+.decoration-bar{
+    width:100%;
+    height:10px;
+    top:0px;
+    background: linear-gradient(to right, #66AABB,#337788);
+    border-radius: 8px 8px 0px 0px;
+}
+.hide{
+    position:absolute;
+    right:10px;
+    top:20px;
+}
+.main {
+    padding-top: 54px; 
+    width: 100%;
+    background-color: white; 
+    display: flex;
+    justify-content: center;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 1200px; 
+    
+}
+
+hr {
+    border-top: 1px #E8E8E8; 
+}
+
+.main-top-container{
+    margin-left: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-width: 600px;
+    margin: 40px auto
+}
+
+hr {
+    border-top: 1px #E8E8E8; 
+}
+.bookinginfo{
+    display:flex;
+    max-width: 1000px;
+}
+
+.bookinginfo-right {
+    position: relative; 
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.pic{
+    width:266px;
+    height: 200px;
+    padding-right:30px
+}
+.booking-title{
+    color:#448899;
+    padding-bottom: 20px;
+    font-weight:bold;
+}
+.booking-info{
+    padding-bottom: 10px;
+    font-weight:bold;
+    color:#757575;
+}
+
+.info{
+    padding-bottom: 10px;
+    font-weight:bold;
+}
+.title{
+    font-weight: bold;
+    padding-bottom: 10px;
+    display:flex;
+    color:#757575;
+}
+
+@media (min-width: 360px) and (max-width: 1200px) {
+    .navbar{
+        flex-wrap: nowrap
+    }
+    .navbar-container {
+        padding: 0 10px;
+    }
+    .left {
+        font-size: 24px;
+        width: auto;
+    }
+    .main{
+        padding-top: 50px;
+    }
+
+    .main-top-container, 
+    .main-mid-container, 
+    .main-bottom-container {
+        margin-left: 20px; 
+        margin-right: 20px;
+    }
+    .main-top-container .title,
+    .main-top-container .info {
+        margin-left: 10px;  
+        margin-top: 30px;  
+        margin-bottom: 25px;
+    }
+    .main-top-container{
+    position: static;
+    right: auto;
+
+}
+    .main-price-container {
+        margin-right: 20px; 
+        align-items: center; 
+    }
+    .bookinginfo {
+        flex-direction: column; 
+    }
+
+    .pic {
+        width: 100%;        
+        height: auto;
+        padding-right: 0;   
+        margin-bottom: 20px;
+    }
+
+    .bookingifo-right {
+        width: 100%;
+    }
+
+    .bookinginfo {
+        flex-direction: column;
+    }
+
+    .pic {
+        width: 100%;       
+        height: auto;
+        padding-right: 0;   
+        margin-bottom: 20px; 
+    }
+
+    .bookingifo-right {
+        width: 100%;
+    }
+    
+    .main-price-container {
+        align-items: flex-end;
+    }
+}

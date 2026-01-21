@@ -191,7 +191,7 @@ async function getreservationinfo(){
         const containerprice = document.querySelector(".main-price-container");
                 containerprice.innerHTML = `
                     <div class="main-price">總價:新台幣${result.price}元</div>
-                    <button class="main-price-btn">確認訂購並付款</button>
+                    <button class="main-price-btn" onclick="onSubmit(event)">確認訂購並付款</button>
                 `;
 
         
@@ -227,4 +227,141 @@ async function deletereservationinfo(){
         console.log(result.message);
     }
 }
+
+
+TPDirect.setupSDK(166552, 'app_kb8zABJ0iVQagADg4jpnKQV5tDlAoucpfLESYa0yiYw1FL87ZBzIPSFvc0z1', 'sandbox')
+// Display ccv field
+let fields = {
+        number: {
+            // css selector
+            element: '#card-number',
+            placeholder: '**** **** **** ****'
+        },
+        expirationDate: {
+            // DOM object
+            element: document.getElementById('card-expiration-date'),
+            placeholder: 'MM / YY'
+        },
+        ccv: {
+            element: '#card-ccv',
+            placeholder: 'ccv'
+        }
+    }
+    
+
+TPDirect.card.setup({
+    
+    fields: fields,
+    styles: {
+        // Style all elements
+        'input': {
+            'color': 'gray'
+        },
+        // Styling ccv field
+        'input.ccv': {
+            // 'font-size': '16px'
+        },
+        // Styling expiration-date field
+        'input.expiration-date': {
+            // 'font-size': '16px'
+        },
+        // Styling card-number field
+        'input.card-number': {
+            // 'font-size': '16px'
+        },
+        // style focus state
+        ':focus': {
+            // 'color': 'black'
+        },
+        // style valid state
+        '.valid': {
+            'color': 'green'
+        },
+        // style invalid state
+        '.invalid': {
+            'color': 'red'
+        },
+        // Media queries
+        // Note that these apply to the iframe, not the root window.
+        '@media screen and (max-width: 400px)': {
+            'input': {
+                'color': 'orange'
+            }
+        }
+    },
+    isMaskCreditCardNumber: true,
+    maskCreditCardNumberRange: {
+        beginIndex: 6,
+        endIndex: 11
+    }
+})
+
+function onSubmit(event) {
+    event.preventDefault()
+
+    const errorMsgElement = document.getElementById("payment-error-msg");
+    errorMsgElement.textContent = ""; 
+
+    const tappayStatus = TPDirect.card.getTappayFieldsStatus()
+
+    if (tappayStatus.canGetPrime === false) {
+        errorMsgElement.textContent = "請確認信用卡資訊是否填寫正確"
+        return
+    }
+
+    // Get prime
+    TPDirect.card.getPrime(async (result) => {
+        if (result.status !== 0) {
+            errorMsgElement.textContent = result.msg
+            return
+        }
+
+        const token = localStorage.getItem("token"); 
+
+        
+        let personalinfo=await fetch("/api/user/auth",{
+            method:"GET",
+            headers: {
+                "Authorization": `Bearer ${token}` 
+            }
+        }); 
+        
+        let personaldata=await personalinfo.json();
+        const id = personaldata.data.id;
+
+        const name = document.querySelector("#bookingname").value;
+        const email = document.querySelector("#bookingemail").value;
+        const phone = document.querySelector("#bookingphonenumber").value;
+
+        let response=await fetch("/api/booking",{
+        method:"GET",
+        headers: {
+            "Authorization": `Bearer ${token}` 
+        }
+        }); 
+
+        let resultdata=await response.json();
+
+        if (resultdata.data !== null && resultdata.data) {
+            const data = resultdata.data;
+            const prime = result.card.prime;
+            const attractionId = data.id;
+        
+            let orderresponse=await fetch("/api/orders",{
+            method:"POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body:JSON.stringify({"prime":prime,"memberid":id,"attraction": attractionId,"date": resultdata.date,"time":resultdata.time,"price":resultdata.price,"name":name,"email":email, "phone": phone})
+            });
+            const orderresult = await orderresponse.json();
+            if (orderresponse.ok) {
+                window.location.href = "/thankyou?number=" + orderresult.data.number;
+            }else{
+                errorMsgElement.textContent = orderresult.message
+                console.log(orderresult);
+            }
+        
+        } })}     
 
