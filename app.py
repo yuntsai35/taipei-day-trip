@@ -11,6 +11,10 @@ con = mysql.connector.connect(
 )
 print("database ready")
 
+import datetime
+import random
+import requests as remote_requests
+
 from fastapi import * 
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -412,3 +416,182 @@ async def delete_booking(request: Request):
             status_code=403,
             content={"error": True, "message": "未登入系統，拒絕存取"}
         )
+    
+
+@app.post("/api/orders")
+async def save_booking_info(request: Request,body: dict = Body(...)):
+    #order
+    now = datetime.datetime.now()
+    time_part = now.strftime("%Y%m%d%H%M%S")
+    
+    random_part = str(random.randint(1000, 9999))
+    number = time_part + random_part
+
+    bearerToken = request.headers.get("Authorization")
+    if not bearerToken:
+        return JSONResponse(
+				status_code=403,
+				content={
+					"error": True,
+					"message": "未登入系統，拒絕存取"})
+
+    if bearerToken:
+        token = bearerToken.split(" ")
+
+        payload = jwt.decode(token[1], os.getenv("SECRET_PASSWORD"), algorithms=["HS256"])
+        id = payload["id"]
+    
+    try:
+        prime=body["prime"]
+        attractionId=body["attraction"]
+        date=body["date"]
+        time=body["time"]
+        price=body["price"]
+        name=body["name"]
+        email=body["email"] 
+        phone=body["phone"]
+
+        if not all([number, id, price, attractionId, date, time, name, email, phone]):
+                return JSONResponse(
+                    status_code=400,
+                    content={"error": True, "message": "建立失敗，輸入不正確或其他原因"}
+                )
+        cursor = con.cursor(dictionary=True)
+        order_sql = """
+                INSERT INTO orders (number, member_id, price, attraction_id, date, time, 
+                                contact_name, contact_email, contact_phone, status)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, 1)
+            """
+        cursor.execute(order_sql, [number, id, price, attractionId, date, time, name, email, phone])
+        con.commit()
+        
+
+        tappay_url ="https://sandbox.tappaysdk.com/tpc/payment/pay-by-prime"
+        tappay_header={
+        "Content-Type": "application/json",
+        "x-api-key": os.getenv("PARTNER_KEY")}
+        tappay_info={
+        "prime": prime,
+        "partner_key": os.getenv("PARTNER_KEY"),
+        "merchant_id": os.getenv("MARCHANT_ID"),
+        "details": f"台北一日遊-[{number}]",
+        "amount": price,
+        "cardholder": {
+            "phone_number": phone,
+            "name": name,
+            "email":email
+        },
+        "remember": False
+        }
+        tp_response = remote_requests.post(tappay_url, headers=tappay_header, json=tappay_info)
+        tp_result = tp_response.json()
+
+        tp_status = tp_result.get("status")
+        tp_msg = tp_result.get("msg")
+        card_info = tp_result.get("card_info", {})
+        last_four = card_info.get("last_four")
+        amount=tp_result.get("amount")
+        currency=tp_result.get("currency")
+        rec_trade_id = tp_result.get("rec_trade_id")
+        print([number, tp_status, tp_msg, rec_trade_id, last_four, amount, currency])
+
+        if not all([number, tp_msg, rec_trade_id, last_four, amount, currency]):
+                return JSONResponse(
+                    status_code=400,
+                    content={"error": True, "message": "建立失敗，輸入不正確或其他原因"}
+                )
+       
+        payment_sql = """
+                INSERT INTO payments (order_number, status, msg, rec_trade_id,card_last_four, amount,currency)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+            """
+        cursor.execute(payment_sql, [number, tp_status, tp_msg, rec_trade_id, last_four, amount, currency])
+        
+        if tp_status == 0:
+                cursor.execute("UPDATE orders SET status = 0 WHERE number = %s", [number])
+                
+                cursor.execute("DELETE FROM booking WHERE member_id=%s",[id])
+                con.commit() 
+                cursor.close()
+            
+                return {
+                    "data": {
+                        "number": number,
+                        "payment": {"status": 0, "message": "付款成功"}
+                    }
+                }
+        else:
+                con.commit()
+                return {
+                    "data": {
+                        "number": number,
+                        "payment": {"status": tp_status, "message": "付款失敗"}
+                    }
+                }
+    
+    except jwt.PyJWTError:
+        return JSONResponse(
+            status_code=403,
+            content={"error": True, "message": "未登入系統，拒絕存取"}
+        )
+    
+    except Exception as e:
+            print(f"後端發生錯誤：{e}")
+            return JSONResponse(
+				status_code=500,
+				content={
+					"error": True,
+					"message": "伺服器內部錯誤"
+				}
+			)
+    
+@app.get("/api/order/{orderNumber}")
+async def get_booking_info(request: Request, orderNumber: str):
+    bearerToken = request.headers.get("Authorization")
+    if not bearerToken:
+        return JSONResponse(status_code=403,
+				content={
+					"error": True,
+					"message": "未登入系統，拒絕存取"})
+    if bearerToken:
+        token = bearerToken.split(" ")
+        payload = jwt.decode(token[1], os.getenv("SECRET_PASSWORD"), algorithms=["HS256"])
+        id = payload["id"]
+
+    cursor=con.cursor(dictionary=True)
+    cursor.execute("select orders.number, orders.member_id, orders.price, orders.attraction_id, orders.date, orders.time, orders.contact_name, orders.contact_email,orders.contact_phone, orders.status, attraction.attraction_id,attraction.name, attraction.address, attraction.images from orders inner join attraction on orders.attraction_id = attraction.attraction_id Where orders.number = %s",[str(orderNumber)])
+    result=cursor.fetchone()
+    cursor.close()
+    if result:
+            images_list=[]
+            if result.get('images'):
+                  for img in result['images'].split('||'):
+                        if img.strip():
+                              images_list.append(img.strip())
+
+            return {"data": {
+                        "number": result['number'],
+                        "price": result['price'],
+                        "trip": {
+                        "attraction": {
+                            "id": result['attraction_id'],
+                            "name": result['name'],
+                            "address": result['address'],
+                            "image": images_list[0]
+                        },
+                        "date": result['date'],
+                        "time": result['time']
+                        },
+                        "contact": {
+                        "name": result['contact_name'],
+                        "email": result['contact_email'],
+                        "phone": result['contact_phone']
+                        },
+                        "status": result['status']
+                    }
+            }
+            
+    else:
+         return {"data": None}
+         
+    

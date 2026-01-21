@@ -6,6 +6,15 @@
   <title>Booking</title>
   <link rel="stylesheet" href="/static/booking.css">
 </head>
+<style>
+    .tpfield {
+        height: 40px;
+        width: 200px;
+        border: 1px solid gray;
+        margin: 5px 0;
+        padding: 5px;
+    }
+</style>
 <body>
   <header>
     <div class="navbar">
@@ -65,7 +74,7 @@
             </div>
             <div class="group">
               <div class="detail">手機號碼:</div>
-              <input type="tel">
+              <input type="tel" id="bookingphonenumber">
             </div>
           <div class="title">請保持手機暢通，準時到達，導覽人員將用手機與您聯繫，務必留下正確的聯絡方式。</div>
         </div>
@@ -74,16 +83,17 @@
           <div class="title">信用卡付款資訊</div>
           <div class="group">
             <div class="detail">卡片號碼:</div>
-            <input placeholder="**** **** **** ****">
+            <div class="tpfield" id="card-number"></div>
             </div>
             <div class="group">
             <div class="detail">過期時間:</div>
-            <input placeholder="MM/YY">
+            <div class="tpfield" id="card-expiration-date"></div>
             </div>
             <div class="group">
             <div class="detail">驗證密碼:</div>
-            <input placeholder="CVV">
+            <div class="tpfield" id="card-ccv"></div>
             </div>
+            <div id="payment-error-msg" style="color: red; margin-top: 10px; font-weight: bold;"></div>
         </div>
         <hr class="main-price-hr">
         <div class="main-price-container">
@@ -98,6 +108,7 @@
     <div> COPYRIGHT &COPY; 2021台北一日遊</div>
   </footer>
 </body>
+<script src="https://js.tappaysdk.com/sdk/tpdirect/v5.14.0"></script>
 <script src="/static/booking.js"></script>
 <script src="static/reservation.js"></script>
 </html>
