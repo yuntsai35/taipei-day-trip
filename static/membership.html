@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Thank You</title>
-  <link rel="stylesheet" href="/static/thankyou.css">
+  <title>Membership</title>
+  <link rel="stylesheet" href="/static/membership.css">
 </head>
 <body>
   <header>
@@ -48,10 +48,42 @@
   <main>
     <div class="main">
     <div class="main-container">
-    
     <div class="main-top-container">
-          
 
+    </div>
+    <hr>
+    <div class="picture">
+    <div class="picture-container">
+    <div class="update-title">會員圖片修改</div>
+    <form id="avatarForm">
+      <input id="avatarInput" name="progressbarTW_img" type="file" accept="image/gif, image/jpeg, image/png">
+      <button type="button" onclick="simpleUpload()">上傳頭像</button>
+    </form>
+    <div id="upload-hint"></div>
+    </div>
+    </div>
+    <hr>
+    <div class="main-mid-container">
+      <div class="change-name">
+       <div class="update-title">會員姓名修改</div>
+       <input class="changename"  type="text" placeholder="請輸入新的姓名" style="margin-bottom:10px;">
+       <button onclick="updatename()">確認修改</button>
+       <div id="name-hint"></div>
+       </div>
+       <div class="change-password">
+       <div class="update-title">會員密碼修改</div>
+       <div class="title">請輸入舊密碼</div>
+       <input class="changeoldpassword" type="password" placeholder="請輸入舊密碼" style="margin-bottom:10px;">
+       <div class="title">請輸入新密碼</div>
+       <input class="changenewpassword" type="password" placeholder="請輸入新密碼" style="margin-bottom:10px;">
+       <button onclick="updatepassword()">確認修改</button>
+       <div id="password-hint"></div>
+       </div>
+    </div>
+    <hr>
+    <div class="main-bottom-container">
+      <div class="order-history" onclick="checkHistoryOrder()">查看訂購的歷史紀錄</div>
+    
     </div>
     </div>
     </div>
@@ -59,6 +91,6 @@
   <footer>
     <div> COPYRIGHT &COPY; 2021台北一日遊</div>
   </footer>
-<script src="/static/thankyou.js"></script>
-<script src="static/reservation.js"></script>
+<script src="/static/membership.js"></script>
+<script src="/static/reservation.js"></script>
 </html>

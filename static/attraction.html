@@ -23,7 +23,7 @@
         <div class="decoration-bar"></div>
         <img onclick=hide() class="hide" src="/static/close.png">
         <div class="login-title">登入會員帳號</div>
-        <input class="login-email" placeholder="輸入電子信箱">
+        <input class="login-email" type=text onblur="isEmail(this.value)" placeholder="輸入電子信箱">
         <input type="password" class="login-password" placeholder="輸入密碼">
         <button class="login-account" onclick="login()">登入帳戶</button>
         <div id="login-hint"></div>
@@ -102,5 +102,5 @@
   </footer>
 </body>
 <script src="/static/attraction.js"></script>
-<script src="static/reservation.js"></script>
+
 </html>

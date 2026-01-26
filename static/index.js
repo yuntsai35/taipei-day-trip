@@ -295,6 +295,10 @@ async function signup(){
     let email=document.querySelector(".signup-email").value;
     let password=document.querySelector(".signup-password").value;
     let hint = document.getElementById("signup-hint");
+   
+    if (!isEmail(email)) {
+        return; 
+    }
 
     if(name === "" || email === "" || password === ""){
             hint.innerHTML = "姓名、信箱或密碼不可為空格！";
@@ -364,8 +368,8 @@ async function checkLoginStatus() {
     const result = await response.json();
 
     if (response.ok && result.data !== null) {
-        authText.textContent = "登出系統";
-        authText.onclick = signOut; 
+        authText.textContent = "會員中心";
+        authText.onclick = membership; 
     } else {
         authText.textContent = "登入/註冊";
         authText.onclick = showlogin;
@@ -376,5 +380,45 @@ window.addEventListener("load", checkLoginStatus);
 function signOut() {
     localStorage.removeItem("token");
     location.reload();
+}
+
+async function membership() {
+    const token = localStorage.getItem("token"); 
+
+    let response = await fetch("/api/user/auth", {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}` 
+        }
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.data !== null) {
+        window.location.href = "/membership";
+        
+    } else {
+        showlogin();
+    }
+}
+
+function isEmail(strEmail) {
+    const emailRegex = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+    const hint = document.getElementById("signup-hint"); 
+
+    if (strEmail === "") return; 
+
+    if (emailRegex.test(strEmail)) { 
+        if (hint) hint.textContent = ""; 
+        return true;
+    } else {
+        if (hint) {
+            hint.textContent = "電子信箱格式錯誤";
+            hint.style.color = "red";
+        } else {
+            alert("電子信箱格式錯誤");
+        }
+        return false;
+    }
 }
 

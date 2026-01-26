@@ -72,7 +72,7 @@ CREATE TABLE `booking` (
   KEY `fk_booking_attraction` (`attractionId`),
   CONSTRAINT `fk_booking_attraction` FOREIGN KEY (`attractionId`) REFERENCES `attraction` (`attraction_id`),
   CONSTRAINT `fk_booking_member` FOREIGN KEY (`member_id`) REFERENCES `member` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,7 +81,7 @@ CREATE TABLE `booking` (
 
 LOCK TABLES `booking` WRITE;
 /*!40000 ALTER TABLE `booking` DISABLE KEYS */;
-INSERT INTO `booking` VALUES (21,1,1,'2026-01-31','afternoon',2500);
+INSERT INTO `booking` VALUES (28,2,1,'2026-01-25','morning',2000);
 /*!40000 ALTER TABLE `booking` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -121,8 +121,9 @@ CREATE TABLE `member` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `photo` varchar(255) DEFAULT '/static/cat.jpg',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,7 +132,7 @@ CREATE TABLE `member` (
 
 LOCK TABLES `member` WRITE;
 /*!40000 ALTER TABLE `member` DISABLE KEYS */;
-INSERT INTO `member` VALUES (1,'彭彭彭','ply@ply.com','12345678'),(2,'abc','abc@abc.com','abcabcabc');
+INSERT INTO `member` VALUES (1,'彭彭彭','ply@ply.com','12345678','/static/uploads/avatar_1.jpg'),(2,'abc','abc@abc.com','abcabcabc','/static/cat.jpg'),(3,'123','123','123','/static/cat.jpg'),(4,'123','123123','123','/static/cat.jpg'),(5,'123','1231234','123','/static/cat.jpg');
 /*!40000 ALTER TABLE `member` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -181,7 +182,7 @@ CREATE TABLE `orders` (
   `created_at` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `number` (`number`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -190,7 +191,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES (1,'202601210139011449',1,2000,2,'2026-01-22','morning','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 01:39:01'),(2,'202601210139349385',1,2000,2,'2026-01-22','morning','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 01:39:34'),(3,'202601210141553978',1,2000,2,'2026-01-22','morning','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 01:41:55'),(4,'202601210146082745',1,2000,2,'2026-01-22','morning','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 01:46:08'),(5,'202601210152029878',1,2000,2,'2026-01-22','morning','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 01:52:02'),(6,'202601210259541635',1,2000,2,'2026-01-22','morning','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 02:59:54'),(7,'202601210301016830',1,2000,2,'2026-01-22','morning','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 03:01:01'),(8,'202601210303581191',1,2000,2,'2026-01-22','morning','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 03:03:58'),(9,'202601210305103169',1,2000,2,'2026-01-22','morning','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 03:05:10'),(10,'202601210307048511',1,2000,2,'2026-01-22','morning','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 03:07:04'),(11,'202601210307142648',1,2000,2,'2026-01-22','morning','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 03:07:14'),(12,'202601210310228418',1,2000,2,'2026-01-22','morning','彭彭彭','ply@ply.com','0912345678',0,'2026-01-21 03:10:22'),(13,'202601210322031183',1,2000,2,'2026-01-22','morning','彭彭彭','ply@ply.com','0912345678',0,'2026-01-21 03:22:03'),(14,'202601210436215542',1,2000,2,'2026-01-22','morning','彭彭彭','ply@ply.com','0912345678',0,'2026-01-21 04:36:21'),(15,'202601211529391617',1,2500,3,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',0,'2026-01-21 15:29:39'),(16,'202601211529401974',1,2500,3,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',0,'2026-01-21 15:29:40'),(17,'202601211604408985',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:40'),(18,'202601211604409022',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:40'),(19,'202601211604429726',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:42'),(20,'202601211604441776',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:44'),(21,'202601211604489862',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:48'),(22,'202601211604493392',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:49'),(23,'202601211604491232',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:49'),(24,'202601211604503069',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:50'),(25,'202601211604504761',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:50'),(26,'202601211604511282',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:51'),(27,'202601211604516328',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:51'),(28,'202601211604528186',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:52'),(29,'202601211604522863',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:52'),(30,'202601211604538661',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:53'),(31,'202601211604536739',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:04:53'),(32,'202601211605023495',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:05:02'),(33,'202601211605317440',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',0,'2026-01-21 16:05:31'),(34,'202601211608122968',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:08:12'),(35,'202601211615451861',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:15:45'),(36,'202601211616035571',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:16:03'),(37,'202601211616459077',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',0,'2026-01-21 16:16:45'),(38,'202601211617583000',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:17:58'),(39,'202601211617595179',1,2500,1,'2026-01-31','afternoon','彭彭彭','ply@ply.com','0912345678',1,'2026-01-21 16:17:59');
+INSERT INTO `orders` VALUES (1,'202601252200336996',1,2500,2,'2026-01-25','afternoon','彭彭彭','ply@ply.com','0912345678',0,'2026-01-25 22:00:33');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -212,7 +213,7 @@ CREATE TABLE `payments` (
   `currency` varchar(10) DEFAULT 'TWD',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -221,7 +222,7 @@ CREATE TABLE `payments` (
 
 LOCK TABLES `payments` WRITE;
 /*!40000 ALTER TABLE `payments` DISABLE KEYS */;
-INSERT INTO `payments` VALUES (1,'202601210310228418',0,'Success',NULL,'4242',2000,'TWD','2026-01-20 19:10:23'),(2,'202601210322031183',0,'Success','D20260121XxkP6U','4242',2000,'TWD','2026-01-20 19:22:04'),(3,'202601210436215542',0,'Success','D20260121jzNb5x','4242',2000,'TWD','2026-01-20 20:36:22'),(4,'202601211529391617',0,'Success','D20260121dWwrfU','4242',2500,'TWD','2026-01-21 07:29:40'),(5,'202601211529401974',0,'Success','D20260121mkn73E','4242',2500,'TWD','2026-01-21 07:29:40'),(6,'202601211605317440',0,'Success','D20260121tSJM5m','4242',2500,'TWD','2026-01-21 08:05:32'),(7,'202601211616459077',0,'Success','D20260121MkqkvJ','4242',2500,'TWD','2026-01-21 08:16:45');
+INSERT INTO `payments` VALUES (1,'202601210310228418',0,'Success',NULL,'4242',2000,'TWD','2026-01-20 19:10:23'),(2,'202601210322031183',0,'Success','D20260121XxkP6U','4242',2000,'TWD','2026-01-20 19:22:04'),(3,'202601210436215542',0,'Success','D20260121jzNb5x','4242',2000,'TWD','2026-01-20 20:36:22'),(4,'202601211529391617',0,'Success','D20260121dWwrfU','4242',2500,'TWD','2026-01-21 07:29:40'),(5,'202601211529401974',0,'Success','D20260121mkn73E','4242',2500,'TWD','2026-01-21 07:29:40'),(6,'202601211605317440',0,'Success','D20260121tSJM5m','4242',2500,'TWD','2026-01-21 08:05:32'),(7,'202601211616459077',0,'Success','D20260121MkqkvJ','4242',2500,'TWD','2026-01-21 08:16:45'),(8,'202601212219218962',0,'Success','D20260121TJX7nD','4242',2500,'TWD','2026-01-21 14:19:21'),(9,'202601231415257470',0,'Success','D202601234dVie6','4242',2500,'TWD','2026-01-23 06:15:26'),(10,'202601252200336996',0,'Success','D202601254E51vx','4242',2500,'TWD','2026-01-25 14:00:33');
 /*!40000 ALTER TABLE `payments` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -234,4 +235,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-01-21 17:29:37
+-- Dump completed on 2026-01-26 13:48:12

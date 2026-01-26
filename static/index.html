@@ -36,7 +36,7 @@
         <img onclick=hide() class="hide" src="/static/close.png">
         <div class="signup-title">註冊會員帳號</div>
         <input class="signup-name" placeholder="輸入姓名">
-        <input class="signup-email" placeholder="輸入電子信箱">
+        <input class="signup-email" type=text onblur="isEmail(this.value)" placeholder="輸入電子信箱">
         <input type="password"class="signup-password" placeholder="輸入密碼">
         <button class="signup-account" onclick="signup()">註冊新帳戶</button>
         <div id="signup-hint"></div>
