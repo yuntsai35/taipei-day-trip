@@ -219,8 +219,8 @@ async function checkLoginStatus() {
     const result = await response.json();
 
     if (response.ok && result.data !== null) {
-        authText.textContent = "登出系統";
-        authText.onclick = signOut; 
+        authText.textContent = "會員中心";
+        authText.onclick = membership; 
     } else {
         authText.textContent = "登入/註冊";
         authText.onclick = showlogin;
@@ -277,5 +277,44 @@ async function safereservationinfo(){
         window.location.href = "/booking";
     }else{
         console.log(result);
+    }
+}
+async function reservation() {
+    const token = localStorage.getItem("token"); 
+
+    let response = await fetch("/api/user/auth", {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}` 
+        }
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.data !== null) {
+        window.location.href = "/booking";
+        
+    } else {
+        showlogin();
+    }
+}
+
+async function membership() {
+    const token = localStorage.getItem("token"); 
+
+    let response = await fetch("/api/user/auth", {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}` 
+        }
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.data !== null) {
+        window.location.href = "/membership";
+        
+    } else {
+        showlogin();
     }
 }
