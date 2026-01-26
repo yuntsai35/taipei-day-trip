@@ -130,6 +130,10 @@ function signOut() {
 
 async function memberinfo() {
     const token = localStorage.getItem("token"); 
+    if (!token) {
+        window.location.href = "/";
+        return;
+    }
 
     let response = await fetch(`/api/membership`, {
         method: "GET",
