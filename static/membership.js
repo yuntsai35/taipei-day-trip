@@ -291,24 +291,22 @@ async function simpleUpload() {
     const hint = document.querySelector("#upload-hint");
     const token = localStorage.getItem("token");
 
-    // 檢查是否有選取檔案
+    
     if (!fileInput.files[0]) {
         hint.innerHTML = "請先選擇圖片檔案";
         hint.style.color = "red";
         return;
     }
 
-    // 建立 FormData 並放入檔案
     const formData = new FormData();
-    // 注意：這裡的 key ('file') 必須與後端 API 參數名稱一致
+   
     formData.append("file", fileInput.files[0]);
 
     try {
         const response = await fetch("/api/user/avatar", {
             method: "PATCH",
             headers: {
-                // 重要：傳送 FormData 時「不要」設定 Content-Type
-                // 瀏覽器會自動生成帶有 Boundary 的 multipart/form-data
+
                 "Authorization": `Bearer ${token}`
             },
             body: formData
@@ -319,7 +317,6 @@ async function simpleUpload() {
         if (response.ok) {
             hint.innerHTML = "圖片上傳成功！";
             hint.style.color = "green";
-            // 成功後重新整理頁面以顯示新頭像
             location.reload(); 
         } else {
             hint.innerHTML = result.message || "上傳失敗";

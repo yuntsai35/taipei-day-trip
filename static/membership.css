@@ -290,9 +290,9 @@ hr {
 }
 .main-bottom-container{
     display: flex;
-    flex-direction: column; /* 讓訂單卡片由上往下排 */
+    flex-direction: column; 
     align-items: center;
-    gap: 20px;             /* 卡片之間的間距 */
+    gap: 20px;             
     width: 100%;
     padding-bottom: 50px;
     }
