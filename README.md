@@ -36,6 +36,8 @@ Constructed backend code using MVC design pattern
 - `CSS`
 - `RDW`
 
+## ER Diagram
+<img width="6728" height="7240" alt="Taipei-day-trip-erd" src="https://github.com/user-attachments/assets/e293f33a-0ed7-413a-bd8c-1449594d567e" />
 
 ## Architecture Diagram:
 
