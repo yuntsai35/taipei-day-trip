@@ -36,7 +36,8 @@ Constructed backend code using MVC design pattern
 - `CSS`
 - `RDW`
 
-### Architecture Diagram:
+
+## Architecture Diagram:
 
 <img width="989" height="405" alt="Screenshot 2026-04-08 173903" src="https://github.com/user-attachments/assets/f9333810-1309-4ad9-9d55-17e925b9035e" />
 
