@@ -43,8 +43,7 @@ body {
 }
 .title{
     background-image: url("[orig] welcome image.png");
-    position: fixed;
-    top: 54px;  
+    margin-top: 54px;
     left: 0;
     width: 100%;
     height: 320px;
@@ -147,32 +146,31 @@ body {
 }
 
 .main {
-    display: flex;
-    justify-content: center;
+    display: block; /* 移除 flex，改為 block */
     margin-top: 40px;
     width: 100%;
 }
-.main-container{
-    margin-top: 330px;
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto; /* 這是讓整個 1200px 區塊在頁面中央的關鍵 */
+    width: 100%;
 }
 
 .list-bar {
-    width: 100%;             
-    max-width: 1200px;       
-    left: 50%;             
-    transform: translateX(-50%); 
+    width: 100%;
+    max-width: 1200px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* 將 center 改為 flex-start */
+    justify-content: flex-start; 
     background-color: white;
-    position: fixed;        
-    z-index: 10;
-    height: 120px;
-    box-sizing: border-box;  
+    margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .list-bar-content {
-    flex: 1;                 
+    flex: 1;  
+    min-width: 0;               
     overflow-x: auto;
     white-space: nowrap; 
     margin: 0px 10px;
@@ -180,29 +178,6 @@ body {
     align-items: center;
 }
 
-.list-bar {
-    width: 100%;             
-    max-width: 1200px;      
-    left: 50%;              
-    transform: translateX(-50%); 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    position: fixed;         
-    z-index: 10;
-    height: 120px;
-    box-sizing: border-box;  
-}
-
-.list-bar-content {
-    flex: 1;                 
-    overflow-x: auto;
-    white-space: nowrap; 
-    margin: 0px 10px;
-    display: flex;
-    align-items: center;
-}
 
 .list-bar-content::-webkit-scrollbar{
     display:none
@@ -246,9 +221,12 @@ body {
     background-image: url('/static/States=Hovered-right.png');
 }
 
-.list-bar-mrt{
-    margin:0px 10px;
-    color:gray;
+.list-bar-mrt {
+    margin: 0px 10px;
+    color: gray;
+    flex-shrink: 0;   /* 關鍵：強制文字不收縮，防止容器為了保護文字而拒絕縮小[cite: 9] */
+    white-space: nowrap; /* 確保不換行[cite: 9] */
+    cursor: pointer;
 }
 
 .list-bar-mrt:hover{
@@ -257,11 +235,10 @@ body {
 
 
 #main-pic {
-    margin-top: 130px;
+    margin-top: 40px;
     max-width: 1200px;
     display: grid;
     gap: 20px;
-    
     grid-template-columns: repeat(auto-fill, minmax(270px, 1fr)); 
     width: 100%;
     padding: 0 15px;
@@ -270,7 +247,8 @@ body {
 
 .attraction-card{
     border: 2px solid #E8E8E8; 
-    border-radius: 10px;    
+    border-radius: 10px;
+
 }
 .img-container{
     position: relative;
@@ -441,7 +419,7 @@ footer div{
 
 @media (min-width: 601px) and (max-width: 1200px) {
     
-    .title-container {
+    .title-container{
         width: 90%;
         max-width: 1200px;
         margin: 0 auto;
@@ -449,23 +427,19 @@ footer div{
     }
 
     .list-bar {
-        width: 90%;
         max-width: 1200px;
-        left: 50%;
-        transform: translateX(-50%);
+        width: 100% !important; /* 強制覆寫為 100%[cite: 9] */
+        padding: 0 50px;        /* 預留左右邊距，避免按鈕貼齊邊緣[cite: 9] */
     }
 
-   
     #main-pic {
-        grid-template-columns: repeat(2, 1fr); 
-        width: 90%;
-        max-width: 1200px;
-        margin: 130px auto 0 auto; 
-        padding: 0;
-        gap: 20px;
-    }
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 15px; 
+    padding: 0 15px;
+    max-width: 600px; 
+    margin: 40px auto;
+   }
 
-    
     .img-container {
         width: 100%;
         height: 200px; 
@@ -481,7 +455,7 @@ footer div{
 }
 
 
-@media (min-width: 360px) and (max-width: 500px) {
+@media (min-width: 360px) and (max-width: 600px) {
     .navbar-container {
         width: 90%;
         white-space: nowrap;
@@ -513,8 +487,7 @@ footer div{
         max-width: none; 
     }
 
-    .search-bar{
-             
+    .search-bar{ 
         min-width: 0;      
         }
     
@@ -540,8 +513,6 @@ footer div{
     .list-bar {
         width: 90%;       
         margin: 0 auto;
-        left: 50%;
-        transform: translateX(-50%);
     }
 
     .list-bar-content {
@@ -549,11 +520,12 @@ footer div{
     }
 
 
+   
     #main-pic {
-        grid-template-columns: 1fr;
-        width: 100%;     
-        max-width: 400px;     
-        padding: 0;
-    }
-
+    grid-template-columns: minmax(auto, 300px); 
+    justify-content: center; /* 水平置中網格 */
+    max-width: 400px;
+    margin: 40px auto;
+}
+    
 }
