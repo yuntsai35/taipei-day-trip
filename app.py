@@ -12,6 +12,8 @@ db_config={
 cnxpool= pooling.MySQLConnectionPool(pool_name = "travel_pool", pool_size = 20, autocommit=True, **db_config)
 print("database ready")
 
+
+
 import datetime
 import random
 import requests as remote_requests
