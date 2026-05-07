@@ -2,13 +2,13 @@
 
 An e-commerce tourism website.
 
-🔗 Website URL: http://35.169.254.54:8000/
+🔗 Website URL: https://taipei-trip.chie-web.com/
 
 | account | password |
 |---|---|
-| ply@ply.com | plyply |
+| yyy@yyy.com | 123123 |
 
-💵 Payment Test: `424242424242`/`0123`/`123`
+💵 Payment Test: `424242424242`/`0129`/`123`
 
 ### Main Features:
 
