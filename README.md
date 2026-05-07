@@ -21,12 +21,12 @@ An e-commerce tourism website.
 
 ### Backend Techniques:
 
-Web Framework: RESTful APIs with Python FastAPI 
-Database: MySQL with connection pooling
-Authenticating users with JWT
-Third-party payment service with Tappay SDK
-Deploy website on AWS EC2 Linux instance.
-Constructed backend code using MVC design pattern
+- Web Framework: RESTful APIs with Python FastAPI 
+- Database: MySQL with connection pooling
+- Authenticating users with JWT
+- Third-party payment service with Tappay SDK
+- Deploy website on AWS EC2 Linux instance.
+- Constructed backend code using MVC design pattern
 
 
 ### Frontend Techniques:
